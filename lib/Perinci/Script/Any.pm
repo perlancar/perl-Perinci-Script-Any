@@ -21,7 +21,7 @@ sub new {
     my $class = shift;
 
     my @mods;
-    if ($ENV{GATEWAY_INTERFACE}) {
+    if ($ENV{GATEWAY_INTERFACE} || $ENV{FCGI_ROLE}) {
         @mods = ('Perinci::WebScript::JSON');
     } else {
         @mods = qw(Perinci::CmdLine::Any);
