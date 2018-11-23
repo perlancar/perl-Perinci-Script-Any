@@ -21,7 +21,7 @@ sub new {
     my $class = shift;
 
     my @mods;
-    if ($ENV{GATEWAY_INTERFACE} || $ENV{FCGI_ROLE}) {
+    if ($ENV{GATEWAY_INTERFACE} || $ENV{FCGI_ROLE} || $ENV{PLACK_ENV}) {
         @mods = ('Perinci::WebScript::JSON');
     } else {
         @mods = qw(Perinci::CmdLine::Any);
@@ -49,7 +49,7 @@ sub new {
 }
 
 1;
-# ABSTRACT: Allow a script to be a command-line script or PSGI (CGI, FCGI)
+# ABSTRACT: Allow a script to be a command-line script or PSGI (CGI, FCGI, raw)
 
 =for Pod::Coverage ^(new)$
 
@@ -65,7 +65,7 @@ In your script:
 =head1 DESCRIPTION
 
 This module lets you have a script that can be a command-line script as well as
-a PSGI (CGI, FCGI) script.
+a PSGI (CGI, FCGI, raw PSGI) script.
 
 
 =head1 ENVIRONMENT
